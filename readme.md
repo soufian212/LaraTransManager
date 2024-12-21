@@ -39,6 +39,6 @@ You will see and empty dashboard, so first of all wen need to initialize and exp
 
 So run 
 ```bash
-php artisan laratransmanager:init
+php artisan translation:init
 ```
 
