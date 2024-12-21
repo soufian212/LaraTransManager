@@ -1,0 +1,30 @@
+{
+    "name": "soufian212/laratransmanager",
+    "description": "Store all your translations on the databse and translate them easly with a dashboard",
+    "type": "library",
+    "version": "0.1.0-beta",
+    "require": {
+        "inertiajs/inertia-laravel": "2.0",
+        "tightenco/ziggy": "dev-main"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Soufian212\\LaraTransManager\\": "src/"
+        },
+        "files": [
+        "helpers/Helpers.php"   
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Soufian212\\LaraTransManager\\LaraTransManagerServiceProvider"
+            ],
+            "aliases": {
+                "LaraTranslations": "Soufian212\\LaraTransManager\\Facades\\LaraTranslations"
+            }
+        }
+    },
+    "minimum-stability": "stable"
+}
