@@ -16,3 +16,23 @@ s
 ```bash
 composer require soufian212/laratransmanager
 ```
+Publish the migration file:
+```bash
+php artisan vendor:publish --tag=laratransmanager-migrations
+```
+And then we need to publish assets
+```bash	
+php artisan vendor:publish --tag=public --force
+```
+And finally publish the config file:
+```bash
+php artisan vendor:publish --tag=laratransmanager-config
+```
+Running the migrations
+```bash
+php artisan migrate
+```
+## Usage
+Visit `/translations` to see the translations dashboard.
+
+
