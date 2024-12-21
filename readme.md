@@ -35,4 +35,10 @@ php artisan migrate
 ## Usage
 Visit `/translations` to see the translations dashboard.
 
+You will see and empty dashboard, so first of all wen need to initialize and export the translations to database.
+
+So run 
+```bash
+php artisan laratransmanager:init
+```
 
