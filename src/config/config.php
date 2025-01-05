@@ -20,6 +20,7 @@ return [
     'cache_lifetime' => 3600, 
 
 
+    'allow_access' => env('ALLOW_TRANSLATION_ACCESS', true),
 
 
 ];

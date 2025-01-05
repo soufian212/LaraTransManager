@@ -3,10 +3,10 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Soufian212\LaraTransManager\Http\Controller\DashboardController;
+use Soufian212\LaraTransManager\Http\Middleware\CheckDashboardAccess;
 use Soufian212\LaraTransManager\Http\Middleware\HandleInertiaRequests;
 
-
-Route::middleware(['web', HandleInertiaRequests::class])->group(function () {
+Route::middleware([CheckDashboardAccess::class, 'web', HandleInertiaRequests::class])->group(function () {
     Route::get('/translations/clearAllCache', [DashboardController::class, 'clearAllCache'])->name('ltm.translations.clearAllCache');
 
 

@@ -3,28 +3,36 @@
 namespace Soufian212\LaraTransManager;
 
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 use Soufian212\LaraTransManager\Services\TranslationService;
 use Soufian212\LaraTransManager\Http\Middleware\HandleInertiaRequests;
 
 class LaraTransManagerServiceProvider extends ServiceProvider
 {
+
+    
+
+
+   
+
+
     /**
      * Register services.
      */
     public function register()
     {
+
         $this->publishes([
             __DIR__ . '/database/migrations' => database_path('migrations'),
         ], 'laratransmanager-migrations');
-        $this->app->singleton('laratransmanager.translation', function ($app) {
+        $this->app->singleton('laratransmanager.translation', function () {
             return new TranslationService();
         });
         $this->publishes([
-                    __DIR__ . '/config/config.php' => config_path('translation.php'),
-                ], 'laratransmanager-config');
-
-        
+            __DIR__ . '/config/config.php' => config_path('translation.php'),
+        ], 'laratransmanager-config');
     }
 
     /**
@@ -32,8 +40,10 @@ class LaraTransManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laratransmanager');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laratransmanager');
 
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -47,6 +57,7 @@ class LaraTransManagerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/dist/vendor' => public_path('vendor/laratransmanager'),
         ], 'public');
+
 
     }
 }
