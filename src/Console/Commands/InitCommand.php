@@ -39,14 +39,47 @@ class InitCommand extends Command
                 foreach ($translations as $key => $value) {
                     // If value is an array, convert it to a JSON string
                     if (is_array($value)) {
-                        $value = json_encode($value);
+                        foreach ($value as $subKey => $subValue) {
+                            if (is_array($subValue)) {
+                                $subValue = json_encode($subValue);
+                            }
+                            Translation::updateOrCreate([
+                                'lang' => $lang,
+                                'file' => $filename,
+                                'key' => $filename . '.' . $key . '.' . $subKey,
+                            ], [
+                                'value' => $subValue,
+                            ]);
+                        }
+                        continue;
                     }
 
-                    // Store the translation in the database or update if it exists
+                    // If value is a JSON string, decode and store separately
+                    if (is_string($value) && $this->isJson($value)) {
+                        $decodedValue = json_decode($value, true);
+                        foreach ($decodedValue as $subKey => $subValue) {
+                            if (is_array($subValue)) {
+                                $subValue = json_encode($subValue);
+                            }
+                            Translation::updateOrCreate([
+                                'lang' => $lang,
+                                'file' => $filename,
+                                'key' => $filename . '.' . $key . '.' . $subKey,
+                            ], [
+                                'value' => $subValue,
+                            ]);
+                        }
+                        continue;
+                    }
+
+                    // Store regular translations
+                    if (is_array($value)) {
+                        $value = json_encode($value);
+                    }
                     Translation::updateOrCreate([
                         'lang' => $lang,
                         'file' => $filename,
-                        'key' => $key,
+                        'key' => $filename . '.' . $key,
                     ], [
                         'value' => $value,
                     ]);
@@ -65,6 +98,10 @@ class InitCommand extends Command
         }
 
         $this->info('Translations have been exported and language files overwritten successfully!');
-    
+    }
+
+    private function isJson($string) {
+        json_decode($string);
+        return json_last_error() === JSON_ERROR_NONE;
     }
 }
