@@ -1,11 +1,11 @@
 {
   "name": "soufian212/laratransmanager",
-  "description": "Store all your translations on the databse and translate them easly with a dashboard",
+  "description": "Store all your translations on the database and translate them easily with a dashboard",
   "type": "library",
-  "version": "0.1.0-beta",
+  "version": "0.3.0-beta",
   "require": {
     "inertiajs/inertia-laravel": "2.0",
-    "tightenco/ziggy": "dev-main"
+    "tightenco/ziggy": "2.4"
   },
   "license": "MIT",
   "autoload": {
